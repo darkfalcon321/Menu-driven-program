@@ -13,8 +13,9 @@ def login():
 
 # Admin
 def admin_AddUser():
-    print('-------------------')
+print('-------------------')
     username= input("Enter username: ")
+    type=input("enter the type of user: ")
     dob= input("Enter date of birth (yyyy/mm/dd): ")
     pass1= input("Enter password: ")
     pass2 = input("Confirm your password: ")
@@ -23,7 +24,17 @@ def admin_AddUser():
             print('\nPasswords does not match')
             pass1= input("Enter password: ")
             pass2 = input("Confirm your password: ")
-    print('------Done!-------\n')
+    try:
+        log = ("insert into Admin (username,type,dob,password)  values(%s,%s,%s,%s)")
+        val=(username,type,dob, pass2)
+        mycursor.execute(log,val)
+        conn.commit()
+        print("\n The process has been over")
+    except Exception as e:
+        print(e)
+    else:
+        print('------Done!-------\n')
+
 
 def Admin_RemoveSelf():
     print('-----------------')
