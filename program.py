@@ -4,7 +4,11 @@ from Functions import *
 def main():
 
     print("Please login")
-    username = login()
+    variable = login()
+    if variable:
+        print("Login Successful")
+    else:
+        print("invalid login")
 def account():
 
     account=input("who are you? \n[1]Admin \n[2]teacher \n[3]Student \n[4]Parent")
