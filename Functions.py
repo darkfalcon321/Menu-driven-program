@@ -1,3 +1,7 @@
+import mysql.connector
+conn=mysql.connector.connect(host="localhost",user="root",passwd="root",charset='utf8',database="school")
+mycursor=conn.cursor()
+
 def whoami(choice):
     if choice==1:
         print("\n[+] Hello master\n")
@@ -7,15 +11,42 @@ def whoami(choice):
         print("Ah ma man whattup yo?")
 
 def login():
-    username=(input("Enter username: "))
-    password=(input("Enter password: "))
-    return username
+    '''so create a table account
+    then use this
 
-# Admin
+
+    '''
+
+    username = input("Enter your Username:-")
+    password = input("Enter your password:-")
+    mycursor.execute(f"select username from accounts where username = '{username}'")  # this is for checking if the username exists in the table
+    mycursor.fetchall()
+    if mycursor.rowcount > 0:
+        mycursor.execute(f"select password from accounts where username = '{username}'")  # this gets the the pwd from the table for that username
+        table_password = mycursor.fetchall()
+        conn.commit()
+        print(table_password)
+    if password == table_password[0][0]:
+        account()   # lead this somewhere
+    else:
+        print("invalid login")
+
+
+
+            # Admin
 def admin_AddUser():
-print('-------------------')
+    print('-------------------')
     username= input("Enter username: ")
-    type=input("enter the type of user: ")
+    a=input("enter the type of user: ")
+    print("1.Admin")
+    print("2.Teacher")
+    print("3.parent")
+    if a == 1:
+        type = "admin"
+    if a == 2:
+        type = "teacher"
+    if a == 3:
+        type = "student"
     dob= input("Enter date of birth (yyyy/mm/dd): ")
     pass1= input("Enter password: ")
     pass2 = input("Confirm your password: ")
@@ -42,7 +73,25 @@ def Admin_RemoveSelf():
 
 def admin_AddAdmin():
     print('-----------------')
-    print('-----------------')
+    username= input("Enter username: ")
+    dob= input("Enter date of birth (yyyy/mm/dd): ")
+    pass1= input("Enter password: ")
+    pass2 = input("Confirm your password: ")
+    if pass1 != pass2:
+        while pass1 != pass2:
+            print('\nPasswords does not match')
+            pass1= input("Enter password: ")
+            pass2 = input("Confirm your password: ")
+    try:
+        log = ("insert into Admin (username,type,dob,password)  values(%s,%s,%s,%s)")
+        val=(username,"Admin",dob, pass2)
+        mycursor.execute(log,val)
+        conn.commit()
+        print("\n The process has been over")
+    except Exception as e:
+        print(e)
+    else:
+        print('-----------------')
 
 def admin_RemoveUser():
     print('-----------------')
