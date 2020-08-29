@@ -27,9 +27,9 @@ def login():
         conn.commit()
         print(table_password)
     if password == table_password[0][0]:
-        account()   # lead this somewhere
+        True   # lead this somewhere
     else:
-        print("invalid login")
+        False
 
 
 
