@@ -1,5 +1,21 @@
-# from mysql.connector import Error
+from mysql.connector import Error
 from Functions import *
+
+def main():
+
+    print("Please login")
+    username = login()
+def account():
+
+    account=input("who are you? \n[1]Admin \n[2]teacher \n[3]Student \n[4]Parent")
+    if account==1:
+        admin()
+    if account==2:
+        teacher()
+    if account==3:
+        student()
+    if account==4:
+        parent()
 
 # Admin
 def admin():
@@ -80,24 +96,6 @@ def parent():
         else:
             print('Please enter a valid option')
 
-def main():
-    choice = int(input('Who are you?\n[1] Admin\n[2] Teacher\n[3] Student\n[+] '))
-    whoami(choice)
-
-    # We need to identify each name so we know who is admin/teacher ect.
-    # Login
-    print("Please login")
-    username = login()
-    #This is just to test (username entered by the user has to be one of these)
-    #Each one will be send to a different page on the program
-    if username == 'Admin':
-        admin()
-    elif username == 'Teacher':
-        teacher()
-    elif username == 'Student':
-        student()
-    elif username == 'Parent':
-        parent()
 
         # conn=mysql.connector.connect(host="localhost",user="root",passwd="root",charset='utf8',database="school")
         # try:
