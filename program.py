@@ -7,11 +7,12 @@ def main():
     variable = login()
     if variable:
         print("Login Successful")
+        account()
     else:
         print("invalid login")
 def account():
 
-    account=int(input("who are you? \n[1]Admin \n[2]teacher \n[3]Student \n[4]Parent"))
+    account=int(input("who are you? \n[1]Admin \n[2]teacher \n[3]Student \n[4]Parent \n[+]"))
     if account==1:
         admin()
     if account==2:
