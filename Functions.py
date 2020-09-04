@@ -1,3 +1,4 @@
+import Program
 import mysql.connector
 conn=mysql.connector.connect(host="localhost",user="root",passwd="root",charset='utf8',database="school")
 mycursor=conn.cursor()
@@ -25,11 +26,13 @@ def login():
         mycursor.execute(f"select password from accounts where username = '{username}'")  # this gets the the pwd from the table for that username
         table_password = mycursor.fetchall()
         conn.commit()
-        print(table_password)
-    if password == table_password[0][0]:
-        True   # lead this somewhere
+        print(table_password[0][0])
+        if password == table_password[0][0]:
+            return True # lead this somewhere
+        else:
+            return False
     else:
-        False
+        return False
 
 
 
@@ -56,7 +59,7 @@ def admin_AddUser():
             pass1= input("Enter password: ")
             pass2 = input("Confirm your password: ")
     try:
-        log = ("insert into Admin (username,type,dob,password)  values(%s,%s,%s,%s)")
+        log = ("insert into accounts (username,type,dob,password)  values(%s,%s,%s,%s)")
         val=(username,type,dob, pass2)
         mycursor.execute(log,val)
         conn.commit()
@@ -83,7 +86,7 @@ def admin_AddAdmin():
             pass1= input("Enter password: ")
             pass2 = input("Confirm your password: ")
     try:
-        log = ("insert into Admin (username,type,dob,password)  values(%s,%s,%s,%s)")
+        log = ("insert into accounts (username,type,dob,password)  values(%s,%s,%s,%s)")
         val=(username,"Admin",dob, pass2)
         mycursor.execute(log,val)
         conn.commit()
