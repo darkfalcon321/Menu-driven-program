@@ -4,17 +4,17 @@ from Functions import *
 def main():
 
     print("Please login")
-    variable = login()
-    if variable:
+    username = login()
+    if username:
         print("Login Successful")
-        account()
+        account(username)
     else:
         print("invalid login")
-def account():
+def account(username):
 
     account=int(input("who are you? \n[1]Admin \n[2]teacher \n[3]Student \n[4]Parent \n[+]"))
     if account==1:
-        admin()
+        admin(username)
     if account==2:
         teacher()
     if account==3:
@@ -23,7 +23,7 @@ def account():
         parent()
 
 # Admin
-def admin():
+def admin(username):
     print('\n[!] You are admin')
     quit = False
     while not quit:
@@ -31,7 +31,7 @@ def admin():
         choice = int(input('[1] Remove this account\n[2] Add_admin\n[3] Add_user\n[4] Remove_user\n[5] exit\n[+] '))
 
         if choice == 1:
-            Admin_RemoveSelf()
+            Admin_RemoveSelf(username)
         elif choice == 2:
             admin_AddAdmin()
         elif choice == 3:
