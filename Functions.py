@@ -1,4 +1,4 @@
-import Program
+from Program import *
 import mysql.connector
 conn=mysql.connector.connect(host="localhost",user="root",passwd="root",charset='utf8',database="school")
 mycursor=conn.cursor()
@@ -14,8 +14,6 @@ def whoami(choice):
 def login():
     '''so create a table account
     then use this
-
-
     '''
 
     username = input("Enter your Username:-")
@@ -28,7 +26,7 @@ def login():
         conn.commit()
         print(table_password[0][0])
         if password == table_password[0][0]:
-            return True # lead this somewhere
+            return username # lead this somewhere
         else:
             return False
     else:
@@ -70,8 +68,16 @@ def admin_AddUser():
         print('------Done!-------\n')
 
 
-def Admin_RemoveSelf():
+def Admin_RemoveSelf(username):
     print('-----------------')
+    d=input("Do you want to continue(y/n): ")
+    if d=='n':
+        admin(username)
+    if d=='y':        
+        a=('delete from accounts where username="{}"'.format(username))
+        mycursor.execute(a)
+        conn.commit()
+        login()
     print('-----------------')
 
 def admin_AddAdmin():
@@ -98,6 +104,8 @@ def admin_AddAdmin():
 
 def admin_RemoveUser():
     print('-----------------')
+    
+
     print('-----------------')
 
 
@@ -152,3 +160,4 @@ def parent_SendSuggestion():
         print()
 
     print('-----------------')
+
